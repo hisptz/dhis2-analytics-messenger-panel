@@ -7,7 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 export default class NextJsCarousel extends Component {
   render() {
     return (
-      <div className="h-[200px]">
+      <div>
         <Carousel
           autoPlay
           infiniteLoop
@@ -18,7 +18,7 @@ export default class NextJsCarousel extends Component {
         >
           <div>
             <Image className="h-[140px]" src="/chatbot.svg" width={45} height={45} alt="image1" />
-            <p className="font-medium mt-3">Configure your Always availabe Analytics Chatbot</p>
+            <p className="font-medium mt-3 text-lg">Configure your Always availabe Analytics Chatbot</p>
           </div>
           <div>
             <Image className="h-[140px]"
@@ -27,7 +27,7 @@ export default class NextJsCarousel extends Component {
               height={100}
               alt="configurebot"
             />
-            <p className="font-medium mt-3">Manage your Analytics Instances</p>
+            <p className="font-medium mt-3 text-lg">Manage your Analytics Instances</p>
           </div>
           <div>
             <Image className="h-[140px]"
@@ -36,7 +36,7 @@ export default class NextJsCarousel extends Component {
               height={100}
               alt="image2"
             />
-            <p className="font-medium mt-3">Schedule your DHIS2 push analytics</p>
+            <p className="font-medium mt-3 text-lg">Schedule your DHIS2 push analytics</p>
           </div>
           <div>
             <Image className="h-[140px]"
@@ -45,7 +45,7 @@ export default class NextJsCarousel extends Component {
               height={100}
               alt="image2"
             />
-            <p className="font-medium mt-3">Manually trigger DHIS2 push analytics</p>
+            <p className="font-medium mt-3 text-lg">Manually trigger DHIS2 push analytics</p>
           </div>
         </Carousel>
       </div>

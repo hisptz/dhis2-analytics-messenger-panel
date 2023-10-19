@@ -1,8 +1,13 @@
+`use client`;
 import { Button, TextField } from "@mui/material";
 
-export default function SignUpSide() {
+interface LoginProps {
+  onloginClicked: () => void;
+}
+
+export default function SignUpSide(props:LoginProps) {
   return (
-    <div className="absolute top-[30px] left-[425px] flex flex-col items-center justify-start gap-[10px] text-center text-cornflowerblue-100 font-m3-label-large">
+    <div className="absolute top-[30px] right-[53%] flex flex-col items-center justify-start gap-[10px] text-center text-cornflowerblue-100 font-m3-label-large">
       <div className="relative">Sign Up</div>
       <div className="relative w-[350px] h-[336px] text-left text-sm text-black">
         <div className="absolute top-[0px] left-[0px] flex flex-col items-start justify-start gap-[20px]">
@@ -47,6 +52,7 @@ export default function SignUpSide() {
           <Button
             className="w-[350px] rounded-full pointer text-cornflowerblue-100 top-10"
             variant="outlined"
+            onClick={props.onloginClicked}
           >
             Login
           </Button>

@@ -1,6 +1,7 @@
+
+
 import LoginFormContainer from "./components/LoginFormContainer";
 import Image from 'next/image';
-import vectorPic from '../../public/vector.svg';
 
 const LandingPage = () => {
 
