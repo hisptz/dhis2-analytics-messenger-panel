@@ -7,7 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 export default class NextJsCarousel extends Component {
   render() {
     return (
-      <div>
+      <div className="w-[300px]">
         <Carousel
           autoPlay
           infiniteLoop
@@ -16,7 +16,7 @@ export default class NextJsCarousel extends Component {
           showThumbs={false}
           showIndicators={false}
         >
-          <div>
+          <div >
             <Image className="h-[140px]" src="/chatbot.svg" width={45} height={45} alt="image1" />
             <p className="font-medium mt-3 text-lg">Configure your Always availabe Analytics Chatbot</p>
           </div>

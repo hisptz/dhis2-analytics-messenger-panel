@@ -6,11 +6,11 @@ import Image from 'next/image';
 const LandingPage = () => {
 
   return (
-    <div className=" bg-cornflowerblue-100 w-screen h-screen overflow-hidden text-center text-[18px] text-cornflowerblue-100 font-m3-label-large">
+    <div className=" bg-cornflowerblue-100 w-screen h-screen  text-center text-[18px] text-cornflowerblue-100 font-m3-label-large">
      
        <div className="absolute inset-0">
        <Image
-            className="absolute h-full w-scren right-0 bottom-0 left-0 max-w-full  max-h-full object-cover"
+            className="absolute h-full w-screen object-cover"
             alt="Background Vector Image"
             src="/vector.svg"
             width={1920}
@@ -24,7 +24,7 @@ const LandingPage = () => {
             width={75}
             height={75}
           /> 
-          <div className="">
+          <div>
             <span>{`Developed by `}</span>
             <i className="font-bold">{`HISP Tanzania, `}</i>
             <span>Powered by</span>
@@ -42,7 +42,6 @@ const LandingPage = () => {
       <LoginFormContainer
         containerTop="calc(51% - 320px)"
         containerLeft="calc(50% - 400px)"
-        // onButtonContainerClick={onButtonContainerClick}
       />
     </div>
   );

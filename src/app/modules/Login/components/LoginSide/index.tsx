@@ -11,16 +11,21 @@ export default function LoginSide({ onSignUpClicked }: LoginSideProps)  {
     <div className="absolute top-[77px] left-[425px] flex flex-col items-center justify-start gap-[10px] text-center text-cornflowerblue-100 font-m3-label-large">
     <div className="relative">Login</div>
     <div className="relative w-[350px] h-[336px] text-left text-sm text-black">
+      <form>
       <div className="absolute top-[0px] left-[0px] flex flex-col items-start justify-start gap-[20px]">
         <div className="flex flex-col items-center justify-start gap-[20px]">
           <TextField
             className="w-[350px] h-[56px]"
+            required
+            type="text"
             id="username"
             label="Username"
             variant="outlined"
           />
           <TextField
             className="w-[350px] h-[56px]"
+            required
+            type="password"
             id="password"
             label="Password"
             variant="outlined"
@@ -54,6 +59,7 @@ export default function LoginSide({ onSignUpClicked }: LoginSideProps)  {
           <div className="absolute top-[9.5px] left-[189.5px] box-border w-[161px] h-px border-t-[1px] border-solid border-cornflowerblue-100" />
         </div>
       </div>
+      </form>
     </div>
   </div>
  )

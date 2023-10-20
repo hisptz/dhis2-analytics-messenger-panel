@@ -30,7 +30,6 @@ const LoginFormContainer: NextPage<LoginFormContainerType> = ({
   };
   const imageStyles = {
     transform: showSignUp ? 'translateX(-11%)  rotateY(-180deg)' : 'translateX(0) rotateY(0)', 
- 
     transformOrigin: 'right', 
     transition: 'transform 0.5s ease-in-out',
     overflow: 'hidden',
@@ -39,10 +38,10 @@ const LoginFormContainer: NextPage<LoginFormContainerType> = ({
 
   return (
     <div
-      className="absolute top-[20px] left-[20px] w-[800px] h-[560px] text-left text-5xl text-black font-inter "
+      className="absolute top-[20px] left-[20px] w-[800px] h-[560px] text-left text-5xl  font-inter "
       style={typeloginStyle}
     >
-      <div className="absolute h-full w-full top-[0%] ">
+      <div className="absolute h-full w-full">
         <div className="absolute h-full w-full rounded-lg bg-m3-sys-light-on-primary shadow-[0px_2px_5px_rgba(0,_142,_221,_0.25)]" />
          <div >
         <Image
@@ -68,10 +67,8 @@ const LoginFormContainer: NextPage<LoginFormContainerType> = ({
           </div>
           </div>
         </div>
-        {/* <SignUpSide  onloginClicked={() => setShowSignUp(false)} /> */}
       </div>
 
-     {/* <LoginSide onSignUpClicked={() => setShowSignUp(true)} />  */}
      {showSignUp ? (
        <SignUpSide onloginClicked={() => setShowSignUp(false)} />
       ) : (
