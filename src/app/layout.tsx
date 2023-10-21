@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 		title: 'DHIS2 Analytics Messenger Panel',
 		description: 'DHIS2 Analytics Messenger Panel',
 }
-
 export default function RootLayout({
 																			 children,
 																	 }: {
