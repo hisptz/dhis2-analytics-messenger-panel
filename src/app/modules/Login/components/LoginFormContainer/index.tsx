@@ -17,7 +17,7 @@ const LoginFormContainer: NextPage<LoginFormContainerType> = ({
   containerLeft,
 }) => {
   const [showSignUp, setShowSignUp] = useState(false);
- 
+
   const typeloginStyle: CSSProperties = useMemo(() => {
     return {
       top: containerTop,
@@ -25,16 +25,15 @@ const LoginFormContainer: NextPage<LoginFormContainerType> = ({
     };
   }, [containerTop, containerLeft]);
   const slidingDivStyles = {
-    transform: showSignUp ? 'translateX(115%)' : 'translateX(0)', 
-    transition: 'transform 0.5s ease-in-out', 
+    transform: showSignUp ? 'translateX(115%)' : 'translateX(0)',
+    transition: 'transform 0.5s ease-in-out',
   };
   const imageStyles = {
-    transform: showSignUp ? 'translateX(-11%)  rotateY(-180deg)' : 'translateX(0) rotateY(0)', 
-    transformOrigin: 'right', 
+    transform: showSignUp ? 'translateX(-11%)  rotateY(-180deg)' : 'translateX(0) rotateY(0)',
+    transformOrigin: 'right',
     transition: 'transform 0.5s ease-in-out',
     overflow: 'hidden',
   };
-
 
   return (
     <div
@@ -57,7 +56,7 @@ const LoginFormContainer: NextPage<LoginFormContainerType> = ({
           <div className="absolute h-[82.84%] w-[95.34%] top-[0%] right-[2.22%] bottom-[17.16%] left-[2.44%] flex flex-col items-center justify-start py-5 px-2.5 box-border gap-[30px]">
             <div className="relative inline-block w-[300px] text-cornflowerblue-100">
               <p className="m-0 font-medium">Welcome to</p>
-              <p className="m-0 text-[24px] font-lalezar text-center font-[900]">
+              <p className="m-0 text-[22px] text-center font-[700]">
                 DHIS2 Analytics Messenger
               </p>
             </div>
