@@ -40,13 +40,13 @@ const AuthContainer: NextPage<LoginFormContainerType> = ({
 										<div
 												style={{background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.50) 0%, rgba(255, 255, 255, 0.20) 100%)'}}
 												className="flex flex-col items-center justify-start box-border gap-[24px] rounded-lg p-4">
-												<div className="relative inline-block w-[300px] text-cornflowerblue-100">
+												<div className="relative inline-block w-[300px] text-primary-500">
 														<p className="m-0 font-medium">Welcome to</p>
 														<p className="m-0 text-[24px] text-center font-[700]">
 																DHIS2 Analytics Messenger
 														</p>
 												</div>
-												<div className="relative text-center text-base text-cornflowerblue-100 font-m3-label-large">
+												<div className="relative text-center text-base text-primary-500 font-m3-label-large">
 														<ImageCarousel/>
 												</div>
 										</div>

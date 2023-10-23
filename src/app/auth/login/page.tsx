@@ -13,7 +13,7 @@ export default function Login() {
 		return (
 				<div
 						className="h-80 flex flex-col items-center justify-start gap-[16px] text-center">
-						<div className="text-cornflowerblue-100 font-bold text-5xl ">Login</div>
+						<div className="text-primary-500 font-bold text-2xl ">Login</div>
 						<div className="flex flex-col gap-[32px]">
 								<form className="flex flex-col items-start justify-start gap-[24px] w-full">
 										<div className="flex flex-col items-center justify-start gap-[16px]">
@@ -34,10 +34,10 @@ export default function Login() {
 														variant="outlined"
 												/>
 												<span className="text-sm">Forgot your password? <Link color="#008edd"
-																																							className="text-cornflowerblue-100 underline"
+																																							className="text-primary-500 underline"
 																																							href="/">Click here</Link></span>
 										</div>
-										<Button fullWidth className="bg-cornflowerblue-100 rounded-full pointer text-white"
+										<Button fullWidth className="bg-primary-500 rounded-full pointer text-white"
 														variant="contained">
 												Login
 										</Button>
@@ -46,7 +46,7 @@ export default function Login() {
 										<Divider role="presentation" color="primary">
 												OR
 										</Divider>
-										<Button className=" rounded-full pointer text-cornflowerblue-100"
+										<Button className=" rounded-full pointer text-primary-500"
 														variant="outlined" onClick={onSignUpClicked}>
 												Sign up
 										</Button>

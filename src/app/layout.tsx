@@ -4,6 +4,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import ThemeRegistry from "@/utils/ThemeRegistry";
 
 export const metadata: Metadata = {
 		title: 'DHIS2 Analytics Messenger Panel',
@@ -16,7 +17,11 @@ export default function RootLayout({
 }) {
 		return (
 				<html lang="en">
-				<body>{children}</body>
+				<body>
+				<ThemeRegistry options={{key: "mui-theme"}}>
+						{children}
+				</ThemeRegistry>
+				</body>
 				</html>
 		)
 }

@@ -39,7 +39,7 @@ export default function SignUpSide() {
 		return (
 				<div
 						className="h-full flex flex-col items-center justify-start gap-[16px] text-center py-[32px]">
-						<div className="text-cornflowerblue-100 font-bold text-5xl ">Signup</div>
+						<div className="text-primary-500 font-bold text-2xl ">Signup</div>
 						<div className="flex flex-col gap-[32px]">
 								<form onSubmit={form.handleSubmit(onSignup)}
 											className="flex flex-col items-start justify-start gap-[24px] w-full">
@@ -102,11 +102,11 @@ export default function SignUpSide() {
 												<div className="flex flex-row gap-2 items-center">
 														<Checkbox defaultChecked/>
 														<span className="text-sm">I have read and consent to the <Link color="#008edd"
-																																													 className="text-cornflowerblue-100 underline"
+																																													 className="text-primary-500 underline"
 																																													 href="/">privacy policy</Link></span>
 												</div>
 										</div>
-										<Button type="submit" fullWidth className="bg-cornflowerblue-100 rounded-full pointer text-white"
+										<Button type="submit" fullWidth className="bg-primary-500 rounded-full pointer text-white"
 														variant="contained">
 												Signup
 										</Button>
@@ -115,7 +115,7 @@ export default function SignUpSide() {
 										<Divider role="presentation" color="primary">
 												OR
 										</Divider>
-										<Button className=" rounded-full pointer text-cornflowerblue-100"
+										<Button className=" rounded-full pointer text-primary-500"
 														variant="outlined" onClick={onLoginClicked}>
 												Login
 										</Button>
