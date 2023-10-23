@@ -1,11 +1,13 @@
 "use client";
-import {Button, Checkbox, Divider, TextField} from "@mui/material";
+import {Button, Divider} from "@mui/material";
 import {useRouter} from "next/navigation";
 import {z} from "zod"
-import {useForm} from "react-hook-form";
+import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
 import Link from "next/link";
+import {RHFTextInput} from "@/components/RHFTextInput";
+import {RHFCheckbox} from "@/components/RHFCheckbox";
 
 const label = {inputProps: {"aria-label": "Checkbox"}};
 
@@ -16,19 +18,23 @@ const signupFormSchema = z.object({
 		phoneNumber: z.string().optional(),
 		email: z.string().email(),
 		password: z.string().min(8, "Password should have at least 8 characters").regex(/[A-Z]/, "Password should have at least one capital letter").regex(/\d/, "Password should have at least one number"),
+		consent: z.boolean().refine((value) => value, "You must consent to the privacy policy to continue")
 })
 
-type SignForm = z.infer<typeof signupFormSchema>;
+export type SignFormData = z.infer<typeof signupFormSchema>;
 
 export default function SignUpSide() {
 		const [showPassword, setShowPassword] = useState(false);
 
-		const onSignup = (data: SignForm) => {
+		const onSignup = (data: SignFormData) => {
 				console.log(data)
 		}
 
-		const form = useForm<SignForm>({
-				resolver: zodResolver(signupFormSchema)
+		const form = useForm<SignFormData>({
+				resolver: zodResolver(signupFormSchema),
+				defaultValues: {
+						consent: true
+				}
 		})
 		const {replace} = useRouter();
 
@@ -41,76 +47,66 @@ export default function SignUpSide() {
 						className="h-full flex flex-col items-center justify-start gap-[16px] text-center py-[32px]">
 						<div className="text-primary-500 font-bold text-2xl ">Signup</div>
 						<div className="flex flex-col gap-[32px]">
-								<form onSubmit={form.handleSubmit(onSignup)}
-											className="flex flex-col items-start justify-start gap-[24px] w-full">
-										<div className="flex flex-col items-center justify-start gap-[16px]">
-												<TextField
-														{...form.register("fullName")}
-														required
-														fullWidth
-														type="text"
-														id="fullname"
-														label="Full Name"
-														variant="outlined"
-														error={!!form.formState.errors.fullName}
-														helperText={form.formState.errors.fullName?.message}
-												/>
-												<TextField
-														{...form.register("username")}
-														required
-														fullWidth
-														type="text"
-														id="username"
-														label="Username"
-														variant="outlined"
-														error={!!form.formState.errors.username}
-														helperText={form.formState.errors.username?.message}
-												/>
-												<TextField
-														{...form.register("phoneNumber")}
-														required
-														fullWidth
-														type="tel"
-														id="phonenumber"
-														label="Phone Number"
-														variant="outlined"
-														error={!!form.formState.errors.phoneNumber}
-														helperText={form.formState.errors.phoneNumber?.message}
-												/>
-												<TextField
-														{...form.register("email")}
-														required
-														fullWidth
-														type="email"
-														id="email"
-														label="Email"
-														variant="outlined"
-														error={!!form.formState.errors.email}
-														helperText={form.formState.errors.email?.message}
-												/>
-												<TextField
-														{...form.register("password")}
-														required
-														fullWidth
-														type="password"
-														id="password"
-														label="Password"
-														variant="outlined"
-														error={!!form.formState.errors.password}
-														helperText={form.formState.errors.password?.message}
-												/>
-												<div className="flex flex-row gap-2 items-center">
-														<Checkbox defaultChecked/>
-														<span className="text-sm">I have read and consent to the <Link color="#008edd"
-																																													 className="text-primary-500 underline"
-																																													 href="/">privacy policy</Link></span>
+								<FormProvider {...form} >
+										<form onSubmit={form.handleSubmit(onSignup)}
+													className="flex flex-col items-start justify-start gap-[24px] w-full">
+												<div className="flex flex-col items-center justify-start gap-[16px]">
+														<RHFTextInput
+																name="fullName"
+																required
+																fullWidth
+																type="text"
+																id="fullname"
+																label="Full Name"
+																size="small"
+														/>
+														<RHFTextInput
+																name="username"
+																required
+																fullWidth
+																type="text"
+																id="username"
+																label="Username"
+																size="small"
+														/>
+														<RHFTextInput
+																name="phoneNumber"
+																required
+																fullWidth
+																type="tel"
+																id="phonenumber"
+																label="Phone Number"
+																size="small"
+														/>
+														<RHFTextInput
+																name="email"
+																required
+																fullWidth
+																type="email"
+																id="email"
+																label="Email"
+																size="small"
+														/>
+														<RHFTextInput
+																name="password"
+																required
+																fullWidth
+																type="password"
+																id="password"
+																label="Password"
+																size="small"
+														/>
+														<RHFCheckbox name="consent" label={<>I have read and consent to the <Link color="#008edd"
+																																																			className="text-primary-500 underline"
+																																																			href="/">privacy
+																policy</Link></>}/>
 												</div>
-										</div>
-										<Button type="submit" fullWidth className="bg-primary-500 rounded-full pointer text-white"
-														variant="contained">
-												Signup
-										</Button>
-								</form>
+												<Button type="submit" fullWidth className="bg-primary-500 rounded-full pointer text-white"
+																variant="contained">
+														Signup
+												</Button>
+										</form>
+								</FormProvider>
 								<div className="flex flex-col gap-[16px]">
 										<Divider role="presentation" color="primary">
 												OR
