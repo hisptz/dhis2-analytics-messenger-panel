@@ -32,7 +32,7 @@ export default function EditDetailsModal(props:any) {
       <Button className="text-black w-24" sx={{ textTransform: 'none', borderRadius: '50px' }} onClick={onClose} variant="outlined" > 
             Cancel
           </Button>
-          <Button className="rounded-full bg-cornflowerblue-100 w-24" onClick={onClose} color="primary" sx={{ textTransform: 'none' }} variant="contained">
+          <Button className="rounded-full bg-cornflowerblue-100 w-24" onClick={onClose} color="primary" sx={{ textTransform: 'none', borderRadius: '50px'  }} variant="contained">
             Save
           </Button>
       </DialogActions>

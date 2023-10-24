@@ -1,26 +1,60 @@
-"use client"
+"use client";
+
 import type { NextPage } from "next";
 import { useState, useCallback } from "react";
 import Image from "next/image";
 import { LogoutModal } from "../logout";
-import { Tabs, Tab, Box } from '@mui/material';
-import { useRouter } from "next/router";
+import { Tabs, Tab, Box } from "@mui/material";
+import NextLink from "next/link";
+import { usePathname } from "next/navigation";
 
-const SideBar: NextPage = () => {
+interface SidebarTabProps {
+  href?: string;
+  src: string;
+  label: string;
+  onClick?: () => void; 
+}
+
+const SidebarTab: React.FC<SidebarTabProps> = ({href,src,label,onClick,...props}) => (
+  <Tab
+    component={href ? NextLink : "div"}
+    href={href}
+    onClick={onClick}
+    icon={
+      <div className="flex items-center gap-2.5 justify-start">
+        <Image className="w-6 h-6" alt="" src={src} width={24} height={24} />
+        <span>{label}</span>
+      </div>
+    }
+    sx={{
+      justifyContent: "flex-start",
+      "&.Mui-selected": {
+        backgroundColor: "rgba(0, 142, 221, 0.25)",
+      },
+      textTransform: "none",
+    }}
+    {...props}
+  />
+);
+
+export default function SideBar () {
   const [isLogOutModalOpen, setLogOutModalOpen] = useState(false);
-
-  const openLogOutModal = useCallback(() => {
-    setLogOutModalOpen(true);
-  }, []);
-
-  const closeLogOutModal = useCallback(() => {
-    setLogOutModalOpen(false);
-  }, []);
-  const [tabValue, setTabValue] = useState(0);
-
+  const openLogOutModal = useCallback(() => {setLogOutModalOpen(true);}, []);
+  const closeLogOutModal = useCallback(() => {setLogOutModalOpen(false); }, []);
+  const pathname = usePathname();
+  const [tabValue, setTabValue] = useState<number>(() => {
+    switch (pathname) {
+      case "/dashboard":
+        return 0;
+      case "/account":
+        return 1;
+      default:
+        return 0;
+    }
+  });
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
-    if(newValue === 2) openLogOutModal(); 
+    if (newValue === 2) openLogOutModal();
   };
 
   return (
@@ -40,66 +74,30 @@ const SideBar: NextPage = () => {
               <p className="m-0 font-bold">Analytics Messenger</p>
             </div>
           </div>
-            <Box  sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex', }}>
-        <Tabs 
-          value={tabValue} 
-          onChange={handleTabChange} 
-          orientation="vertical" 
-          variant="standard"
-          textColor="primary"
-          indicatorColor="primary"
-          sx={{
-            width: '14rem',
-            '& .MuiTabs-indicator': {
-              left: 0,
-              right: 'auto',
-              width: '4px',
-              backgroundColor: 'cornflowerblue-100',
-              transition: 'none'
-            }
-          }}
-        >
-          <Tab 
-    icon={
-      <div className="flex items-center gap-2.5 justify-start">
-        <Image className="w-6 h-6" alt="" src="/precision-manufacturing.svg" width={24} height={24} />
-        <span>Management</span>
-      </div>
-    }  sx={{
-      justifyContent: 'flex-start', 
-      '&.Mui-selected': {
-        backgroundColor: 'rgba(0, 142, 221, 0.25)'
-      },textTransform: 'none'
-    }}
-  />
-  <Tab 
-    icon={
-      <div className="flex items-center gap-2.5 justify-start">
-        <Image className="w-6 h-6" alt="" src="/person.svg" width={24} height={24} />
-        <span>Account</span>
-      </div>
-    }  sx={{
-      justifyContent: 'flex-start', 
-      '&.Mui-selected': {
-        backgroundColor: 'rgba(0, 142, 221, 0.25)'
-      },textTransform: 'none'
-    }}
-  />
-  <Tab 
-    icon={
-      <div className="flex items-center gap-2.5 justify-start">
-        <Image className="w-6 h-6" alt="" src="/logout.svg" width={24} height={24} />
-        <span>Logout</span>
-      </div>
-    } sx={{
-      justifyContent: 'flex-start', 
-      '&.Mui-selected': {
-        backgroundColor: 'rgba(0, 142, 221, 0.25)'
-      },textTransform: 'none'
-    }}
-    onClick={openLogOutModal}
-  /> </Tabs>
-      </Box>
+          <Box sx={{ flexGrow: 1, display: "flex", marginTop:1 }}>
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              orientation="vertical"
+              variant="standard"
+              textColor="primary"
+              indicatorColor="primary"
+              sx={{
+                width: "14rem",
+                "& .MuiTabs-indicator": {
+                  left: 0,
+                  right: "auto",
+                  width: "4px",
+                  backgroundColor: "cornflowerblue-100",
+                  transition: "none",
+                },
+              }}
+            >
+              <SidebarTab href="/dashboard" src="/precision-manufacturing.svg" label="Management"/>
+              <SidebarTab href="/account" src="/person.svg" label="Account" />
+              <SidebarTab src="/logout.svg" label="Logout" onClick={openLogOutModal} />
+            </Tabs>
+          </Box>
         </div>
       </nav>
       {isLogOutModalOpen && (
@@ -109,4 +107,4 @@ const SideBar: NextPage = () => {
   );
 };
 
-export default SideBar;
+
