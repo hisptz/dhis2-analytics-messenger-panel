@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import Image from "next/image";
 import { LogoutModal } from "../logout";
 import { Tabs, Tab, Box } from '@mui/material';
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SideBar: NextPage = () => {
   const [isLogOutModalOpen, setLogOutModalOpen] = useState(false);
@@ -54,7 +54,8 @@ const SideBar: NextPage = () => {
               left: 0,
               right: 'auto',
               width: '4px',
-              backgroundColor: 'cornflowerblue-100'
+              backgroundColor: 'cornflowerblue-100',
+              transition: 'none'
             }
           }}
         >
