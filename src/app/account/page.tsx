@@ -1,0 +1,49 @@
+"use client";
+import React, { useState } from "react";
+import SideBar from "../shared/components/SideBar";
+import { Button } from "@mui/material";
+import EditDetailsModal from "./components/EditDetaisModal";
+import ChangePasswordModal from "./components/PasswordModal";
+
+export default function Account() {
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+
+  return (
+    <div className="flex h-screen bg-white">
+      <SideBar />
+      <div className="flex-1 flex-col items-start justify-start p-3 text-left ">
+        <h1 className="text-7xl text-cornflowerblue-100 font-lalezar font-bold">Account</h1>
+        <div className="w-full bg-m3-sys-light-on-primary p-6 border border-cornflowerblue-200 rounded-lg">
+          <div className="flex items-center gap-6">
+            <div className="w-12 h-12 rounded-full bg-cornflowerblue-100 flex items-center justify-center">
+              <span className="text-lg font-medium">A</span>
+            </div>
+            <div className="grid grid-cols-2 gap-2 text-black">
+                <label>Username:</label>
+                <b className="text-cornflowerblue-100">d2Analytics</b>
+                <label>Email:</label>
+                <span className="text-cornflowerblue-100">test@mail.com</span>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 mt-6">
+            <Button variant="outlined" className="text-cornflowerblue-100"  sx={{ textTransform: 'none', borderRadius: '50px' }} onClick={() => setEditModalOpen(true)}>
+              Edit details
+            </Button>
+            <Button variant="outlined" className="text-cornflowerblue-100" sx={{ textTransform: 'none', borderRadius: '50px' }} onClick={() => setPasswordModalOpen(true)}>
+              Change Password
+            </Button>
+            <EditDetailsModal 
+              open={editModalOpen} 
+              onClose={() => setEditModalOpen(false)} 
+            />
+            <ChangePasswordModal 
+              open={passwordModalOpen} 
+              onClose={() => setPasswordModalOpen(false)} 
+             />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -21,6 +21,8 @@ const config: Config = {
         cornflowerblue: {
           "100": "#008edd",
           "200": "rgba(0, 142, 221, 0.25)",
+          "300": "rgba(0, 142, 221, 0.1)",
+
         },
         blueviolet: "#9747ff",
         tomato: {

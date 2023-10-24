@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.14.14",
+    "@mui/joy": "^5.0.0-beta.11",
     "@mui/material": "^5.14.14",
     "@parse/react-ssr": "^0.0.1-alpha.18",
     "lodash": "^4.17.21",
@@ -20,6 +21,7 @@
     "parse": "^4.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-pro-sidebar": "^1.1.0-alpha.1",
     "react-responsive-carousel": "^3.2.23"
   },
   "devDependencies": {
