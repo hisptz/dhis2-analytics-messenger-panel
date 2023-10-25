@@ -4,13 +4,13 @@ import {useRouter} from "next/navigation";
 import {z} from "zod"
 import {FormProvider, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {useState} from "react";
 import Link from "next/link";
 import {RHFTextInput} from "@/components/RHFTextInput";
 import {RHFCheckbox} from "@/components/RHFCheckbox";
-
-const label = {inputProps: {"aria-label": "Checkbox"}};
-
+import {useBoolean} from "usehooks-ts";
+import {LoadingButton} from "@mui/lab";
+import {RHFPasswordInput} from "@/components/RHFPasswordInput";
+import {ParseClient} from "@/utils/parse/client";
 
 const signupFormSchema = z.object({
 		fullName: z.string().refine((value) => value.includes(" "), "A space is required between your first and last name"),
@@ -24,10 +24,22 @@ const signupFormSchema = z.object({
 export type SignFormData = z.infer<typeof signupFormSchema>;
 
 export default function SignUpSide() {
-		const [showPassword, setShowPassword] = useState(false);
+		const router = useRouter();
+		const {value: showPassword, toggle: toggleShowPassword} = useBoolean(false)
+		const onSignup = async ({username, password, email, phoneNumber, fullName}: SignFormData) => {
+				try {
+						const user = await ParseClient.User.signUp(username, password, {
+								fullName,
+								email,
+								phoneNumber
+						});
 
-		const onSignup = (data: SignFormData) => {
-				console.log(data)
+						if (user) {
+								router.replace('/')
+						}
+				} catch (e) {
+						alert(e.message)
+				}
 		}
 
 		const form = useForm<SignFormData>({
@@ -44,13 +56,13 @@ export default function SignUpSide() {
 
 		return (
 				<div
-						className="h-full flex flex-col items-center justify-start gap-[16px] text-center py-[32px]">
+						className="h-full w-full flex flex-col items-center justify-center gap-[16px] text-center">
 						<div className="text-primary-500 font-bold text-2xl ">Signup</div>
 						<div className="flex flex-col gap-[32px]">
 								<FormProvider {...form} >
 										<form onSubmit={form.handleSubmit(onSignup)}
 													className="flex flex-col items-start justify-start gap-[24px] w-full">
-												<div className="flex flex-col items-center justify-start gap-[16px]">
+												<div className="flex flex-col items-center justify-start gap-[16px] w-full">
 														<RHFTextInput
 																name="fullName"
 																required
@@ -87,24 +99,28 @@ export default function SignUpSide() {
 																label="Email"
 																size="small"
 														/>
-														<RHFTextInput
+														<RHFPasswordInput
 																name="password"
 																required
 																fullWidth
-																type="password"
+																type={showPassword ? "text" : "password"}
 																id="password"
 																label="Password"
 																size="small"
 														/>
-														<RHFCheckbox name="consent" label={<>I have read and consent to the <Link color="#008edd"
-																																																			className="text-primary-500 underline"
-																																																			href="/">privacy
-																policy</Link></>}/>
+														<RHFCheckbox name="consent"
+																				 label={<span className="text-sm">I have read and consent to the <br/> <Link
+																						 color="#008edd"
+																						 className="text-primary-500 underline"
+																						 href="/">privacy
+																policy</Link></span>}/>
 												</div>
-												<Button type="submit" fullWidth className="bg-primary-500 rounded-full pointer text-white"
-																variant="contained">
+												<LoadingButton loadingIndicator="Please Wait..." loading={form.formState.isSubmitting}
+																			 type="submit" fullWidth
+																			 className="bg-primary-500 rounded-full pointer text-white"
+																			 variant="contained">
 														Signup
-												</Button>
+												</LoadingButton>
 										</form>
 								</FormProvider>
 								<div className="flex flex-col gap-[16px]">
