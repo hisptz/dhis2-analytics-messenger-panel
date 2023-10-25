@@ -1,37 +1,33 @@
-import React from 'react';
-import { Card, CardContent, Typography, IconButton } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import WifiOffIcon from '@mui/icons-material/WifiOff';
-import Image from 'next/image';
+import React from "react";
+import WifiOffIcon from "@mui/icons-material/WifiOff";
+import Image from "next/image";
+import { Wifi } from "@mui/icons-material";
 
-const DHIS2StatusCard: React.FC = () => {
+export default function StatusCard() {
   return (
-    <Card className=" m-4 bg-pink-100 rounded-lg shadow-md">
-      <CardContent className="flex items-center space-x-4 p-4">
-        
-        <Image src="/group-5.svg" alt="Icon" width={45} height={45} className="w-16 h-16 rounded-full bg-gray-200" />
-        
-        <div className="flex flex-col items-start">
-          <div className="flex items-center justify-between w-full">
-            <Typography variant="body1" className="text-black">
-              Name: RHMCAH Tanzania
-            </Typography>
-          </div>
+    <div className=" m-4 flex space-x-4 p-4 px-8 rounded-lg border-solid border-grey-300 border-2">
+      <Image src="/group-5.svg" alt="Icon" width={80} height={80} />
 
-          <Typography variant="body1" className="text-black">
-            DHIS2: <a href="https://rmncah.org.tz" className="text-blue-500 underline">https://rmncah.org.tz</a>
-          </Typography>
+      <div className="flex flex-col items-start space-y-1">
+        <div className="text-gray-700 flex space-x-2">
+          <span className="font-bold">Name:</span>
+          <span className="text-primary-500">RHMCAH Tanzania</span>
+        </div>
 
-          <div className="flex items-center space-x-2">
-            <WifiOffIcon color="error" />
-            <Typography variant="body2" className="text-red-600">
-              Status: Offline
-            </Typography>
+        <div className="text-gray-700 space-x-2">
+          <span className="font-bold">DHIS2:</span>
+          <a href="https://rmncah.org.tz" className="text-primary-500 underline">https://rmncah.org.tz </a>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <span className="text-gray-700 font-bold">Status:</span>
+
+          <div className="text-red-600 bg-red-100 rounded-sm text-xs flex space-x-1 p-1">
+            <WifiOffIcon color="error" sx={{ fontSize: 15 }} />
+            <h1 className="">Offline</h1>
           </div>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
-};
-
-export default DHIS2StatusCard;
+}
