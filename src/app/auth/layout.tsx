@@ -6,7 +6,7 @@ export default function AuthLayout({children}: { children: React.ReactNode }) {
 
 		return (
 				<div
-						className=" bg-cornflowerblue-100 w-screen h-screen  text-center text-[18px] text-cornflowerblue-100 font-m3-label-large">
+						className=" bg-primary-500 w-screen h-screen  text-center text-[18px] text-primary-500 font-m3-label-large">
 
 						<div className="absolute inset-0">
 								<Image

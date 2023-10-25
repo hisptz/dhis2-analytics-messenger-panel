@@ -1,9 +1,41 @@
 "use client";
-import {Button, Checkbox, TextField} from "@mui/material";
+import {Button, Divider} from "@mui/material";
 import {useRouter} from "next/navigation";
+import {z} from "zod"
+import {FormProvider, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {useState} from "react";
+import Link from "next/link";
+import {RHFTextInput} from "@/components/RHFTextInput";
+import {RHFCheckbox} from "@/components/RHFCheckbox";
 
 const label = {inputProps: {"aria-label": "Checkbox"}};
+
+
+const signupFormSchema = z.object({
+		fullName: z.string().refine((value) => value.includes(" "), "A space is required between your first and last name"),
+		username: z.string().min(4, "Username should have at least 4 characters"),
+		phoneNumber: z.string().optional(),
+		email: z.string().email(),
+		password: z.string().min(8, "Password should have at least 8 characters").regex(/[A-Z]/, "Password should have at least one capital letter").regex(/\d/, "Password should have at least one number"),
+		consent: z.boolean().refine((value) => value, "You must consent to the privacy policy to continue")
+})
+
+export type SignFormData = z.infer<typeof signupFormSchema>;
+
 export default function SignUpSide() {
+		const [showPassword, setShowPassword] = useState(false);
+
+		const onSignup = (data: SignFormData) => {
+				console.log(data)
+		}
+
+		const form = useForm<SignFormData>({
+				resolver: zodResolver(signupFormSchema),
+				defaultValues: {
+						consent: true
+				}
+		})
 		const {replace} = useRouter();
 
 		const onLoginClicked = () => {
@@ -12,91 +44,78 @@ export default function SignUpSide() {
 
 		return (
 				<div
-						className="absolute top-[10px] right-[53%] flex flex-col items-center justify-start gap-[10px] text-center text-cornflowerblue-100 font-m3-label-large">
-						<div className="relative">Sign Up</div>
-						<div className="relative w-[350px] h-[336px] text-left text-sm text-black">
-								<form>
-										<div className="absolute top-[0px] left-[0px] flex flex-col items-start justify-start gap-[20px]">
-												<div className="flex flex-col items-center justify-start gap-[20px]">
-														<TextField
-																className="w-[350px] h-[45px]"
+						className="h-full flex flex-col items-center justify-start gap-[16px] text-center py-[32px]">
+						<div className="text-primary-500 font-bold text-2xl ">Signup</div>
+						<div className="flex flex-col gap-[32px]">
+								<FormProvider {...form} >
+										<form onSubmit={form.handleSubmit(onSignup)}
+													className="flex flex-col items-start justify-start gap-[24px] w-full">
+												<div className="flex flex-col items-center justify-start gap-[16px]">
+														<RHFTextInput
+																name="fullName"
 																required
+																fullWidth
 																type="text"
 																id="fullname"
 																label="Full Name"
-																variant="outlined"
+																size="small"
 														/>
-														<TextField
-																className="w-[350px] h-[45px]"
+														<RHFTextInput
+																name="username"
 																required
+																fullWidth
 																type="text"
 																id="username"
 																label="Username"
-																variant="outlined"
+																size="small"
 														/>
-														<TextField
-																className="w-[350px] h-[45px]"
+														<RHFTextInput
+																name="phoneNumber"
 																required
-																type="number"
+																fullWidth
+																type="tel"
 																id="phonenumber"
 																label="Phone Number"
-																variant="outlined"
+																size="small"
 														/>
-														<TextField
-																className="w-[350px] h-[45px]"
+														<RHFTextInput
+																name="email"
 																required
+																fullWidth
 																type="email"
 																id="email"
-																label="email"
-																variant="outlined"
+																label="Email"
+																size="small"
 														/>
-														<TextField
-																className="w-[350px] h-[45px]"
+														<RHFTextInput
+																name="password"
 																required
+																fullWidth
 																type="password"
 																id="password"
 																label="Password"
-																variant="outlined"
+																size="small"
 														/>
-
-														<div className="relative w-[300px] h-6">
-																<div className="absolute top-[0px] left-[0px] leading-[24px]">
-																		<Checkbox {...label} required defaultChecked/>
-																		<span>{`I have read and consent to the  `}</span>
-																		<span className="[text-decoration:underline] text-cornflowerblue-100">
-                  <a>privacy policy.</a>
-                </span>
-																</div>
-														</div>
+														<RHFCheckbox name="consent" label={<>I have read and consent to the <Link color="#008edd"
+																																																			className="text-primary-500 underline"
+																																																			href="/">privacy
+																policy</Link></>}/>
 												</div>
-
-												<Button
-														className="bg-cornflowerblue-100 w-[350px] rounded-full pointer text-white"
-														variant="contained"
-												>
-														Sign up
+												<Button type="submit" fullWidth className="bg-primary-500 rounded-full pointer text-white"
+																variant="contained">
+														Signup
 												</Button>
-										</div>
-										<div className="absolute top-[410px] left-[0px] w-[350px] h-20 text-center">
-												<Button
-														className="w-[350px] rounded-full pointer text-cornflowerblue-100 top-7"
-														variant="outlined"
-														onClick={onLoginClicked}
-												>
-														Login
-												</Button>
-
-												<div className="absolute top-[2px] w-[350px]">
-            <span className="absolute top-[0px] left-[166px] leading-[20px] font-medium ">
-              OR
-            </span>
-														<div
-																className="absolute top-[9.5px] left-[-0.5px] box-border w-[161px] h-px border-t-[1px] border-solid border-cornflowerblue-100"/>
-														<div
-																className="absolute top-[9.5px] left-[189.5px] box-border w-[161px] h-px border-t-[1px] border-solid border-cornflowerblue-100"/>
-												</div>
-										</div>
-								</form>
+										</form>
+								</FormProvider>
+								<div className="flex flex-col gap-[16px]">
+										<Divider role="presentation" color="primary">
+												OR
+										</Divider>
+										<Button className=" rounded-full pointer text-primary-500"
+														variant="outlined" onClick={onLoginClicked}>
+												Login
+										</Button>
+								</div>
 						</div>
 				</div>
 		);
