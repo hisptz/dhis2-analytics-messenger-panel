@@ -5,48 +5,74 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+import { RHFTextInput } from "@/components/RHFTextInput";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const editSchema = z.object({
+  username: z.string().min(4, "Username should have at least 4 characters"),
+  email: z.string().email(),
+});
+export type EditData = z.infer<typeof editSchema>;
 
 export default function EditDetailsModal(props: any) {
   const { open, onClose } = props;
+  const form = useForm<EditData>({
+    resolver: zodResolver(editSchema),
+    // defaultValues: {
+    //     consent: true
+    // }
+})
+const onEdit = async (data: EditData) => {
+ console.log("here is", data);
+}
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm">
+    <Dialog open={open} onClose={onClose} maxWidth="xs">
       <DialogTitle sx={{ mb: -2 }}>Edit User Details</DialogTitle>
+      <FormProvider {...form} >
+										<form onSubmit={form.handleSubmit(onEdit)}>
       <DialogContent>
-        <TextField
-          fullWidth
-          color="primary"
+        <RHFTextInput
+          name="username"
           margin="dense"
-          label="User name"
-          variant="outlined"
+          id="username"
+          type="text"
+          label="Username"
         />
-        <TextField
-          fullWidth
+        <RHFTextInput
+          name="email"
           margin="dense"
+          type="email"
+          id="email"
           label="Email"
-          variant="outlined"
-          sx={{ mb: 12 }}
+          sx={{ mb: 8 }}
         />
+       
       </DialogContent>
       <DialogActions>
         <Button
-          className="text-black w-24"
-          sx={{ textTransform: "none", borderRadius: "50px" }}
+          className="w-24"
+          color="inherit"
+          sx={{ textTransform: "none", borderRadius: "50px", color: "GrayText"   }}
           onClick={onClose}
           variant="outlined"
         >
           Cancel
         </Button>
         <Button
-          className="rounded-full bg-primary-500 w-24"
-          onClick={onClose}
+          className="bg-primary-500 w-24"
           color="primary"
           sx={{ textTransform: "none", borderRadius: "50px" }}
           variant="contained"
+          type="submit"
         >
           Save
         </Button>
       </DialogActions>
+          </form>
+      </FormProvider>
     </Dialog>
   );
 }

@@ -23,7 +23,7 @@ const instanceSchema = z.object({
   dhis2Instance: z.string({required_error: "DHIS2 Instance is required"}).url(),
   dhis2AccessToken:z.string({required_error: "AccessToken is required"}),
   messagingPlatform: z.string({required_error: "Messaging platform is required"}),
-  whatsAppnumber: z.string().min(10, "Number should not have less than 10 characters").regex(/\d/, "Password should have at least one number")
+  whatsAppnumber: z.string().min(13, "Number should not have less than 10 characters").regex(/\d/, "Password should have at least one number")
 })
 
 export type InstanceData = z.infer<typeof instanceSchema>;
