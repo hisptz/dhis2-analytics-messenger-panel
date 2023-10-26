@@ -10,12 +10,12 @@ import { grey } from "@mui/material/colors";
 
 const InstanceDetail: React.FC = () => {
   return (
-    <div className="bg-white h-screen p-8">
-      <Button startIcon={<ArrowBackIcon />} className="text-blue-500 mb-6">
+    <div className="px-4">
+      <Button startIcon={<ArrowBackIcon />} sx={{textTransform:'none' , paddingBottom:2}}>
         Back
       </Button>
 
-      <div className="flex space-x-12 border-solid border-primary-300 p-4 border-2">
+      <div className="flex space-x-12 border-solid border-primary-300 p-4 border-[1px] rounded-lg">
         <div className="flex flex-col space-y-4 w-1/3">
           <div className="space-y-1">
             <div className="flex space-x-2">
@@ -33,7 +33,7 @@ const InstanceDetail: React.FC = () => {
             </div>
             <div className="flex space-x-2 items-center">
               <span className="font-bold">Status:</span>
-              <div className="text-red-600 bg-red-100 rounded-sm text-xs flex space-x-1 p-1">
+              <div className="text-red-600 bg-red-100 rounded-lg text-xs flex space-x-1 p-1">
                 <WifiOff color="error" sx={{ fontSize: 15 }} />
                 <h1 className="">Offline</h1>
               </div>

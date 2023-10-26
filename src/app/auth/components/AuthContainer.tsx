@@ -4,6 +4,7 @@ import type {NextPage} from "next";
 import ImageCarousel from "./Carousel";
 import {usePathname} from "next/navigation";
 import {Card} from "@mui/material";
+import Image from "next/image"
 
 type LoginFormContainerType = {
 		children: React.ReactNode
@@ -27,13 +28,30 @@ const AuthContainer: NextPage<LoginFormContainerType> = ({
 
 		return (
 				<Card
-						className="absolute w-[800px] h-[680px]"
 						style={{
-								top: `calc(50vh - 280px)`,
-								left: `calc(50vw - 400px)`,
+								height: 640,
+								width: 800,
+								position: "absolute",
+								left: "50%",
+								top: "50%",
+								transform: "translate(-50%, -50%)"
 						}}
 				>
-						<div className="h-full w-full flex flex-row justify-between">
+						<div className="h-full w-full flex flex-row justify-between relative">
+								<div style={{
+										height: 72,
+										width: 72,
+										top: 0,
+										left: (400 - 36), //
+										background: "white",
+										position: "absolute",
+										display: "flex",
+										alignItems: "center",
+										justifyContent: "center",
+										borderRadius: 4
+								}}>
+										<Image alt="logo" height={56} width={56} src="/analyticsmessenger-11@2x.png"/>
+								</div>
 								<div
 										style={carouselDivStyle}
 										className="flex-1 flex flex-col bg-yellow-400 justify-center items-center h-full min-h-[80%]">

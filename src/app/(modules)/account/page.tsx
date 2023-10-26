@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import SideBar from "../shared/components/SideBar";
 import { Button } from "@mui/material";
 import EditDetailsModal from "./components/EditDetaisModal";
 import ChangePasswordModal from "./components/PasswordModal";
@@ -11,7 +10,6 @@ export default function Account() {
 
   return (
     <div className="flex h-screen bg-white">
-      <SideBar />
       <div className="flex-1 flex-col items-start justify-start p-3 text-left ">
         <h1 className="text-2xl  text-primary-500 font-lalezar font-bold">
           Account
@@ -28,7 +26,7 @@ export default function Account() {
               <span className="text-primary-500">test@mail.com</span>
             </div>
           </div>
-          <div className="flex items-start gap-4 mt-6">
+          <div className="flex items-start gap-4 mt-10">
             <Button
               variant="outlined"
               className="text-primary-500"

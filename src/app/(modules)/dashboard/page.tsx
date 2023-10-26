@@ -1,5 +1,4 @@
 "use client";
-import SideBar from "../shared/components/SideBar";
 import { Button } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
 import DHIS2AnalyticsModal from "./components/InstanceModal";
@@ -9,8 +8,7 @@ export default function Dashboard() {
   const [openModal, setOpenModal] = useState(false);
   return (
     <div className=" bg-white h-screen flex">
-      <SideBar />
-      <div className="flex flex-col items-start justify-start p-3   text-3xl text-primary-500 w-full">
+      <div className="flex flex-col items-start justify-start p-3   text-2xl text-primary-500 w-full">
         <div className="text-left font-bold">Instances Management</div>
         <div className=" flex flex-col items-center justify-center w-full py-6 px-auto gap-[64px] text-sm text-black font-m3-label-large">
           <h1>
@@ -34,3 +32,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
