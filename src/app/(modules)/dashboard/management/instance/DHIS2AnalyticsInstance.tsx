@@ -15,24 +15,19 @@ import { zodResolver } from '@hookform/resolvers/zod';
 interface DHIS2AnalyticsModalProps {
   open: boolean;
   onClose: () => void;
-  onFormSubmit?: (data: InstanceData) => void;
 }
 
 const instanceSchema = z.object({
   name: z.string({required_error: "Username is required"}),
   dhis2Instance: z.string({required_error: "DHIS2 Instance is required"}).url(),
   dhis2AccessToken:z.string({required_error: "AccessToken is required"}),
-  messagingPlatform: z.string({required_error: "Messaging platform is required"}),
-  whatsAppnumber: z.string().min(13, "Number should not have less than 10 characters").regex(/\d/, "Password should have at least one number")
 })
 
 export type InstanceData = z.infer<typeof instanceSchema>;
 
-const DHIS2AnalyticsModal: React.FC<DHIS2AnalyticsModalProps> = ({ open, onClose, onFormSubmit}) => {
+const DHIS2AnalyticsModal: React.FC<DHIS2AnalyticsModalProps> = ({ open, onClose}) => {
   const handleOpen = async (data: InstanceData)  => {
-    if (onFormSubmit) {
-      onFormSubmit(data);
-    }
+  
     console.log("here is", data); 
   };
   const form = useForm<InstanceData>({
@@ -44,10 +39,10 @@ const DHIS2AnalyticsModal: React.FC<DHIS2AnalyticsModalProps> = ({ open, onClose
     <Dialog
       open={open}
       onClose={onClose}
-      aria-labelledby="form-dialog-instance"
+      aria-labelledby="form-dialog-dhis2instance"
       maxWidth="xs"
     >
-      <DialogTitle id="form-dialog-instance">DHIS2 Analytics Instance</DialogTitle>
+      <DialogTitle id="form-dialog-instance" style={{marginBottom:-30}}>DHIS2 Analytics Instance</DialogTitle>
       <FormProvider {...form} >
         <form onSubmit={form.handleSubmit(handleOpen)}>
       <DialogContent>
@@ -74,24 +69,7 @@ const DHIS2AnalyticsModal: React.FC<DHIS2AnalyticsModalProps> = ({ open, onClose
           type="text"
           placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
         />
-        <RHFTextInput
-          name="messagingPlatform"
-          select
-          margin="dense"
-          label="Messaging platform"
-        >
-          <MenuItem value="WhatsApp">WhatsApp</MenuItem>
-          <MenuItem value="Telegram">Telegram</MenuItem>
-         
-        </RHFTextInput>
-        <RHFTextInput
-          name="whatsAppnumber"
-          margin="dense"
-          label="WhatsApp number"
-          type="text"
-          helperText="Start the number with country code, eg: +255"
-          placeholder="+2556830000000"
-        />
+       
       </DialogContent>
       <DialogActions>
         <Button

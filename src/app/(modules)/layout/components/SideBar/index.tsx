@@ -103,17 +103,9 @@ export default function SideBar() {
                 },
               }}
             >
-              <SidebarTab
-                href="/dashboard"
-                src="/precision-manufacturing.svg"
-                label="Management"
-              />
+              <SidebarTab href="/dashboard" src="/precision-manufacturing.svg" label="Management"/>
               <SidebarTab href="/account" src="/person.svg" label="Account" />
-              <SidebarTab
-                src="/logout.svg"
-                label="Logout"
-                onClick={openLogOutModal}
-              />
+              <SidebarTab src="/logout.svg" label="Logout" onClick={openLogOutModal} />
             </Tabs>
           </Box>
         </div>

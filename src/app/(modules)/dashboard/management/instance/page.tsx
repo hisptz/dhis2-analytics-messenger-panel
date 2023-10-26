@@ -1,17 +1,31 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import OnlineIcon from "@mui/icons-material/OnlinePrediction"; // Placeholder, you might want to change this
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import EditIcon from "@mui/icons-material/Edit";
-import BlockIcon from "@mui/icons-material/Block";
 import { Wifi, WifiOff } from "@mui/icons-material";
-import { grey } from "@mui/material/colors";
+import DHIS2AnalyticsModal from "./DHIS2AnalyticsInstance";
 
-const InstanceDetail: React.FC = () => {
+export default function InstanceDetail () {
+  const [openModal, setOpenModal] = useState(false);
+  const [isActive, setIsActive] = useState(true);
+  const toggleActiveStatus = () => {
+    setIsActive(!isActive);
+  };
+  const buttonStyles = isActive 
+    ? { 
+        textTransform: "none", 
+        borderRadius: "50px", 
+        color: "GrayText" 
+      } 
+    : { 
+        textTransform: "none", 
+        borderRadius: "50px", 
+        color: "",
+      };
   return (
     <div className="px-4">
-      <Button startIcon={<ArrowBackIcon />} sx={{textTransform:'none' , paddingBottom:2}}>
+      <Button startIcon={<ArrowBackIcon />} sx={{textTransform:'none' , paddingBottom:2}} variant="text" href="/dashboard/management">
         Back
       </Button>
 
@@ -38,34 +52,40 @@ const InstanceDetail: React.FC = () => {
                 <h1 className="">Offline</h1>
               </div>
             </div>
-            <Button
-            className="font-bold text-xl"
-              endIcon={<ContentCopyIcon />}
-              sx={{ textTransform: "none",fontWeight: 'bold', fontSize: 'inherit' }}
-            >
-              Copy Access Token
-            </Button>
+            {isActive && (
+              <Button
+                className="font-bold text-xl"
+                endIcon={<ContentCopyIcon />}
+                sx={{ textTransform: "none", fontWeight: 'bold', fontSize: 'inherit' }}
+              >
+                Copy Access Token
+              </Button>
+            )}
           </div>
           <div className="flex space-x-4 ">
             <Button
               className="w-24"
-              sx={{ textTransform: "none", borderRadius: "50px" }}
+              sx={{ textTransform: "none", borderRadius: "50px"}}
               variant="outlined"
+              onClick={() => setOpenModal(true)}
             >
               Edit
             </Button>
             <Button
-              className="text-grey-300 w-24"
-              color="inherit"
-              sx={{
-                textTransform: "none",
-                borderRadius: "50px",
-                color: "GrayText",
-              }}
+              className={`w-24 ${!isActive && 'mt-4 transition-all duration-1000'}`}  
+              color={isActive ? "inherit" : "primary"}
+              sx={buttonStyles}
               variant="outlined"
+              onClick={toggleActiveStatus}
             >
-              Deactivate
+              {isActive ? 'Deactivate' : 'Activate'}
             </Button>
+            {openModal && (
+            <DHIS2AnalyticsModal 
+          open={openModal} 
+          onClose={() => setOpenModal(false)}
+        />
+      )}
           </div>
         </div>
         
@@ -80,4 +100,4 @@ const InstanceDetail: React.FC = () => {
   );
 };
 
-export default InstanceDetail;
+

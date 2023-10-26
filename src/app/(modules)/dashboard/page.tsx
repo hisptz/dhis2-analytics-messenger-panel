@@ -6,7 +6,6 @@ import { useState } from "react";
 import QRCodeModal from "./components/QRCodeModal";
 
 export default function Dashboard() {
-  // const [openModal, setOpenModal] = useState(false);
   const [openInstanceModal, setOpenInstanceModal] = useState(false);
   const [openQRModal, setOpenQRModal] = useState(false);
   const [qrValue, setQrValue] = useState(''); 

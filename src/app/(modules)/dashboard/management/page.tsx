@@ -1,5 +1,4 @@
 "use client";
-import SideBar from "@/app/shared/components/SideBar";
 import { Button } from "@mui/material";
 import { Add, ArrowForward } from "@mui/icons-material";
 import { useState } from "react";
@@ -9,8 +8,7 @@ import StatusCard from "../components/StatusCard";
 export default function Dashboard() {
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className=" bg-white h-screen flex">
-      <SideBar />
+    <div className=" flex">
       <div className="flex flex-col items-start justify-start p-3    text-primary-500 w-full">
         <h1 className="text-left font-bold text-2xl mb-2">
           Instances Management
