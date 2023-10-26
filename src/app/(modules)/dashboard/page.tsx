@@ -1,11 +1,21 @@
 "use client";
 import { Button } from "@mui/material";
 import { ArrowForward } from "@mui/icons-material";
-import DHIS2AnalyticsModal from "./components/InstanceModal";
+import DHIS2AnalyticsModal, { InstanceData } from "./components/InstanceModal";
 import { useState } from "react";
+import QRCodeModal from "./components/QRCodeModal";
 
 export default function Dashboard() {
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
+  const [openInstanceModal, setOpenInstanceModal] = useState(false);
+  const [openQRModal, setOpenQRModal] = useState(false);
+  const [qrValue, setQrValue] = useState(''); 
+
+  const handleFormSubmit = (instanceData:InstanceData) => {
+    setQrValue(instanceData.dhis2Instance); 
+    setOpenInstanceModal(false);
+    setOpenQRModal(true);
+  };
   return (
     <div className=" bg-white h-screen flex">
       <div className="flex flex-col items-start justify-start p-3   text-2xl text-primary-500 w-full">
@@ -21,12 +31,24 @@ export default function Dashboard() {
             sx={{ textTransform: "none", borderRadius: "50px" }}
             variant="contained"
             endIcon={<ArrowForward />}
-            onClick={() => setOpenModal(true)} 
+            onClick={() => setOpenInstanceModal(true)}
           >
             Get Started
           </Button>
-          {openModal && <DHIS2AnalyticsModal open={openModal} onClose={() => setOpenModal(false)} />}
-
+          {openInstanceModal && (
+        <DHIS2AnalyticsModal 
+          open={openInstanceModal} 
+          onClose={() => setOpenInstanceModal(false)} 
+          onFormSubmit={handleFormSubmit}
+        />
+      )}
+      {openQRModal && (
+        <QRCodeModal 
+          open={openQRModal} 
+          onClose={() => setOpenQRModal(false)} 
+          qrValue={qrValue}
+        />
+      )}
         </div>
       </div>
     </div>

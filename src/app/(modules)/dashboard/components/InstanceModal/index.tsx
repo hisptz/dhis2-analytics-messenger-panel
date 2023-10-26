@@ -16,6 +16,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 interface DHIS2AnalyticsModalProps {
   open: boolean;
   onClose: () => void;
+  onFormSubmit: (data: InstanceData) => void;
 }
 
 const instanceSchema = z.object({
@@ -28,12 +29,13 @@ const instanceSchema = z.object({
 
 export type InstanceData = z.infer<typeof instanceSchema>;
 
-const DHIS2AnalyticsModal: React.FC<DHIS2AnalyticsModalProps> = ({ open, onClose}) => {
+const DHIS2AnalyticsModal: React.FC<DHIS2AnalyticsModalProps> = ({ open, onClose, onFormSubmit}) => {
   const [openQr, setOpenQr] = useState(false);
   const [qrValue, setQrValue] = useState(""); 
   const handleOpen = async (data: InstanceData)  => {
     setQrValue(data.dhis2Instance);
-     setOpenQr(true); 
+    onFormSubmit(data);
+     //setOpenQr(true); 
     
      console.log("here is", data); 
     };
