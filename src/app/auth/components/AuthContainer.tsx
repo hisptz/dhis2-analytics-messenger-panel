@@ -45,7 +45,6 @@ const AuthContainer: NextPage<LoginFormContainerType> = ({
 										left: (400 - 36), //
 										background: "white",
 										position: "absolute",
-										zIndex: 1999,
 										display: "flex",
 										alignItems: "center",
 										justifyContent: "center",
